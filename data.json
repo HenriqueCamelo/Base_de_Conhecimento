@@ -1,0 +1,59 @@
+[
+  {
+    "nome": "Midnight Club 3: DUB Edition",
+    "descricao": "A série que levou as corridas em pistas fechadas para as ruas da cidade está de volta para elevar o patamar mais uma vez. ",
+    "data_criacao": "2005",
+    "link_oficial": "https://www.rockstargames.com/br/games/midnightclub3",
+    "tags": [
+      "Corrida noturna",
+      "Customização",
+      "Racha-de-rua"
+    ],
+    "imagem_url": "https://upload.wikimedia.org/wikipedia/pt/thumb/f/f3/Midnight_Club_3_DUB_Edition_capa.jpg/330px-Midnight_Club_3_DUB_Edition_capa.jpg",
+    "trailer_url": "https://www.youtube.com/embed/nWb9XZxuaqE?autoplay=1&mute=1&controls=0&loop=1&playlist=nWb9XZxuaqE&start=5"
+  },
+  {
+    "nome": "Kingdom Hearts III",
+    "descricao": "KINGDOM HEARTS III conta a história do poder da amizade enquanto Sora e seus amigos embarcam em uma aventura perigosa. Ambientado em uma vasta gama de mundos da Disney e da Pixar, KINGDOM HEARTS acompanha a jornada de Sora, um jovem garoto e herdeiro inconsciente de um poder espetacular.",
+    "data_criacao": "2019",
+    "link_oficial": "https://www.kingdomhearts.com/3/us/home/",
+    "tags": [
+      "RPG",
+      "Fantasia",
+      "Aventura",
+      "Um jogador"
+    ],
+    "imagem_url": "https://upload.wikimedia.org/wikipedia/pt/thumb/3/3c/KingdomHeartsIII.png/330px-KingdomHeartsIII.png",
+    "trailer_url": "https://www.youtube.com/embed/zrunNL3xsUY?autoplay=1&mute=1&controls=0&loop=1&playlist=zrunNL3xsUY&start=30"
+    
+  },
+  {
+    "nome": "Mega Man X Legacy Collection",
+    "descricao": "Mega Man X Legacy Collection inclui os lendários títulos de 16-bits e o empolgante avanço à era dos 32-bits: Mega Man X, Mega Man X2, Mega Man X3 e Mega Man X4. ",
+    "data_criacao": "2018",
+    "link_oficial": "https://store.steampowered.com/app/743890/Mega_Man_X_Legacy_Collection/",
+    "tags": [
+      "Plataforma",
+      "2D",
+      "Retrô",
+      "Ação"
+    ],
+    "imagem_url": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Mega_Man_X_Legacy_Collection_1_box_art.png/250px-Mega_Man_X_Legacy_Collection_1_box_art.png",
+    "trailer_url": "https://www.youtube.com/embed/Usis7p46Vxs?autoplay=1&mute=1&controls=0&loop=1&playlist=Usis7p46Vxs&start=10"
+  },
+  {
+    "nome": "Undertale",
+    "descricao": "Bem-vindo a UNDERTALE. Neste RPG, você controla um humano que cai no subterrâneo, no mundo dos monstros. Agora você precisa encontrar uma saída... ou ficará preso para sempre.",
+    "data_criacao": "2015",
+    "link_oficial": "https://undertale.com/",
+    "tags": [
+      "Vários finais",
+      "RPG",
+      "Multiplas escolhas",
+      "Um jogador",
+      "Retrô"
+    ],
+    "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Undertale_cover.jpg?20200103120235",
+    "trailer_url": "https://www.youtube.com/embed/1Hojv0m3TqA?autoplay=1&mute=1&controls=0&loop=1&playlist=1Hojv0m3TqA&start=8"
+  }
+]

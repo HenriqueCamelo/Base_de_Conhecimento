@@ -1,0 +1,356 @@
+/* Importação de fonte inspirada em jogos */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+    /* Cores do tema: base escura, neon azul/magenta */
+    --cor-fundo: #121212;
+    --cor-texto-principal: #e0e0e0;
+    --cor-neon-azul: #00f0ff; /* Neon Azul */
+    --cor-neon-magenta: #ff00ff; /* Neon Magenta */
+    --cor-card-fundo: #1e1e1e;
+    --cor-card-borda: #333333;
+    --sombra-padrao: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --sombra-neon-azul: 0 0 15px var(--cor-neon-azul), 0 0 5px rgba(0, 240, 255, 0.5);
+    --sombra-neon-magenta: 0 0 15px var(--cor-neon-magenta), 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+/* --- Estilos Globais e do Corpo --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Estilos Globais e do Corpo --- */
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: var(--cor-fundo); 
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+    padding-bottom: 50px; 
+}
+
+/* 🎥 Container do Vídeo de Background (fixed no fundo da tela) */
+#background-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; 
+    background-color: transparent; 
+    transition: opacity 0.5s ease; 
+    opacity: 0; 
+}
+
+#background-video-container iframe {
+    width: 100vw;
+    height: 56.25vw; /* 16:9 Aspect Ratio */
+    min-height: 100vh;
+    min-width: 177.77vh; /* Mágica para o iframe cobrir toda a tela */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    pointer-events: none; 
+}
+
+/* Garante que o conteúdo principal fique ACIMA do vídeo de background (z-index: -1) */
+header, main, footer {
+    position: relative;
+    z-index: 1; 
+}
+
+/* --- Estilo do Aviso de Interação (DICA) --- */
+
+#aviso-interacao {
+    position: absolute; 
+    top: 50%; /* 50% do topo do header */
+    left: 55%; /* 50% da esquerda do header */
+    /* Este transform centraliza o elemento com base no SEU PRÓPRIO tamanho */
+    transform: translate(-50%, -50%); 
+    
+    padding: 6px 12px;
+    background-color: var(--cor-neon-magenta);
+    color: var(--cor-fundo);
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--cor-neon-magenta);
+    z-index: 10; /* Garante que ele fique acima */
+    animation: pulse 1.5s infinite alternate; 
+    cursor: default;
+}
+
+/* Animação 'pulse' mantida */
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 5px var(--cor-neon-magenta);
+        opacity: 0.9;
+    }
+    to {
+        box-shadow: 0 0 15px var(--cor-neon-magenta), 0 0 8px rgba(255, 0, 255, 0.8);
+        opacity: 1;
+    }
+}
+
+/* --- Cabeçalho (Header) --- */
+
+header {
+    position: relative;
+    background-color: #1a1a1a;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--cor-neon-azul);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--cor-neon-azul);
+    text-shadow: 0 0 5px var(--cor-neon-azul); 
+}
+
+header div {
+    display: flex;
+    gap: 10px;
+}
+
+header input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid var(--cor-neon-magenta);
+    background-color: #2c2c2c;
+    color: var(--cor-texto-principal);
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+}
+
+header input[type="text"]::placeholder {
+    color: #999;
+}
+
+header input[type="text"]:focus {
+    border-color: var(--cor-neon-azul);
+    box-shadow: 0 0 8px var(--cor-neon-azul);
+}
+
+header button#botao-busca {
+    padding: 10px 20px;
+    background-color: var(--cor-neon-magenta);
+    color: var(--cor-fundo);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header button#botao-busca:hover {
+    background-color: var(--cor-neon-azul);
+    box-shadow: 0 0 10px var(--cor-neon-azul);
+}
+
+/* --- Conteúdo Principal (Main) e Container de Cards --- */
+
+main {
+    padding: 20px;
+}
+
+.card-container {
+    display: flex; 
+    flex-direction: column; 
+    gap: 25px; /* Ajustado o espaço entre cards */
+    max-width: 35vw; /* Reduzido para 35vw (largura do bloco) */
+    margin: 40px 0 40px 20px; 
+}
+
+/* --- Estilo dos Cards (Article) --- */
+
+.card {
+    background-color: var(--cor-card-fundo);
+    padding: 10px; /* Reduzido o padding interno */
+    border-radius: 10px;
+    border: 1px solid var(--cor-card-borda);
+    box-shadow: var(--sombra-padrao);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 140px; /* Reduzido a altura mínima */
+    z-index: 2; 
+}
+
+/* Efeito Hover: Transform e Sombra Colorida (alternando cores) */
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--sombra-neon-azul);
+}
+
+.card:nth-child(even):hover { /* Cards pares com sombra magenta */
+    box-shadow: var(--sombra-neon-magenta);
+}
+
+/* Container Flexbox para imagem e texto lado a lado */
+.card-conteudo {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start; 
+}
+
+.card-imagem {
+    width: 30%; 
+    max-width: 100px; /* Imagem ainda mais estreita */
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid var(--cor-neon-magenta);
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+.card-info {
+    width: 70%; 
+}
+
+.card h2 {
+    color: var(--cor-neon-azul);
+    font-size: 1.2rem; /* Título menor */
+    margin-bottom: 4px; 
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--cor-neon-azul);
+    padding-bottom: 4px;
+}
+
+/* Estilizando parágrafos usando as classes do JS */
+.card p.card-data { 
+    color: var(--cor-neon-magenta);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 6px; 
+}
+
+.card p.card-descricao { 
+    color: var(--cor-texto-principal);
+    margin-bottom: 8px; 
+    font-size: 0.8rem;
+}
+
+.card a {
+    display: inline-block;
+    color: var(--cor-fundo);
+    background-color: var(--cor-neon-magenta);
+    padding: 4px 8px; /* Botão menor */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.75rem; /* Fonte do botão menor */
+}
+
+.card a:hover {
+    background-color: var(--cor-neon-azul);
+    box-shadow: 0 0 8px var(--cor-neon-azul); 
+}
+
+/* --- Rodapé (Footer) --- */
+
+.footer {
+    background-color: #1a1a1a;
+    color: #999;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid var(--cor-card-borda);
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    z-index: 1; 
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-links li a {
+    color: var(--cor-neon-magenta);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: var(--cor-neon-azul);
+    text-shadow: 0 0 5px var(--cor-neon-azul);
+}
+
+/* --- Estilos para o MODO IMERSIVO --- */
+
+/* Quando o body tem a classe 'immersive-mode', todos os cards, 
+   o header e o footer ficam com opacidade reduzida. */
+
+.immersive-mode .card,
+.immersive-mode header,
+.immersive-mode .footer {
+    opacity: 0.1; /* Esmaece os elementos */
+    transition: opacity 0.3s ease;
+}
+
+/* 🏆 NOVO: Garante que o CARD EM FOCO (em hover) mantenha a opacidade total */
+.immersive-mode .card:hover {
+    opacity: 0.78; 
+}
+
+/* --- Responsividade Básica --- */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    header div {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    header input[type="text"],
+    header button#botao-busca {
+        width: 48%;
+    }
+
+    .card-container {
+        max-width: 95vw; 
+        margin: 40px auto; 
+        gap: 20px;
+    }
+
+    /* Empilha a imagem e o texto em telas pequenas */
+    .card-conteudo {
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+    }
+
+    .card-imagem {
+        width: 60%; 
+        max-width: 130px; 
+        margin-bottom: 10px;
+    }
+
+    .card-info {
+        width: 100%;
+    }
+    
+    .card h2 {
+        font-size: 1.4rem; 
+    }
+}
