@@ -1,5 +1,6 @@
 [
   {
+    "id": 101,
     "nome": "Midnight Club 3: DUB Edition",
     "descricao": "A série que levou as corridas em pistas fechadas para as ruas da cidade está de volta para elevar o patamar mais uma vez. ",
     "data_criacao": "2005",
@@ -10,9 +11,16 @@
       "Racha-de-rua"
     ],
     "imagem_url": "https://upload.wikimedia.org/wikipedia/pt/thumb/f/f3/Midnight_Club_3_DUB_Edition_capa.jpg/330px-Midnight_Club_3_DUB_Edition_capa.jpg",
-    "trailer_url": "https://www.youtube.com/embed/nWb9XZxuaqE?autoplay=1&mute=1&controls=0&loop=1&playlist=nWb9XZxuaqE&start=5"
+    "trailer_url": "https://www.youtube.com/embed/nWb9XZxuaqE?autoplay=1&mute=1&controls=0&loop=1&playlist=nWb9XZxuaqE&start=5",
+    "requisitos": {
+      "ram": "256 MB",
+      "processador": "Intel Pentium 4 ou AMD Athlon XP 2.0 GHz",
+      "placa_video": "64 MB compatível com DirectX 9.0c",
+      "espaco_disco": "4.7 GB"
+    }
   },
   {
+    "id": 102,
     "nome": "Kingdom Hearts III",
     "descricao": "KINGDOM HEARTS III conta a história do poder da amizade enquanto Sora e seus amigos embarcam em uma aventura perigosa. Ambientado em uma vasta gama de mundos da Disney e da Pixar, KINGDOM HEARTS acompanha a jornada de Sora, um jovem garoto e herdeiro inconsciente de um poder espetacular.",
     "data_criacao": "2019",
@@ -24,10 +32,16 @@
       "Um jogador"
     ],
     "imagem_url": "https://upload.wikimedia.org/wikipedia/pt/thumb/3/3c/KingdomHeartsIII.png/330px-KingdomHeartsIII.png",
-    "trailer_url": "https://www.youtube.com/embed/zrunNL3xsUY?autoplay=1&mute=1&controls=0&loop=1&playlist=zrunNL3xsUY&start=30"
-    
+    "trailer_url": "https://www.youtube.com/embed/zrunNL3xsUY?autoplay=1&mute=1&controls=0&loop=1&playlist=zrunNL3xsUY&start=30",
+    "requisitos": {
+      "ram": "8 GB",
+      "processador": "Intel Core i5 3330 ou AMD Ryzen 3 1200",
+      "placa_video": "NVIDIA GeForce GTX 760 ou AMD Radeon R7 260X",
+      "espaco_disco": "75 GB"
+    }
   },
   {
+    "id": 103,
     "nome": "Mega Man X Legacy Collection",
     "descricao": "Mega Man X Legacy Collection inclui os lendários títulos de 16-bits e o empolgante avanço à era dos 32-bits: Mega Man X, Mega Man X2, Mega Man X3 e Mega Man X4. ",
     "data_criacao": "2018",
@@ -39,9 +53,16 @@
       "Ação"
     ],
     "imagem_url": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Mega_Man_X_Legacy_Collection_1_box_art.png/250px-Mega_Man_X_Legacy_Collection_1_box_art.png",
-    "trailer_url": "https://www.youtube.com/embed/Usis7p46Vxs?autoplay=1&mute=1&controls=0&loop=1&playlist=Usis7p46Vxs&start=10"
+    "trailer_url": "https://www.youtube.com/embed/Usis7p46Vxs?autoplay=1&mute=1&controls=0&loop=1&playlist=Usis7p46Vxs&start=10",
+    "requisitos": {
+      "ram": "2 GB",
+      "processador": "Intel Core i5-4460",
+      "placa_video": "NVIDIA GeForce GTX 660",
+      "espaco_disco": "10 GB"
+    }
   },
   {
+    "id": 104,
     "nome": "Undertale",
     "descricao": "Bem-vindo a UNDERTALE. Neste RPG, você controla um humano que cai no subterrâneo, no mundo dos monstros. Agora você precisa encontrar uma saída... ou ficará preso para sempre.",
     "data_criacao": "2015",
@@ -54,6 +75,12 @@
       "Retrô"
     ],
     "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Undertale_cover.jpg?20200103120235",
-    "trailer_url": "https://www.youtube.com/embed/1Hojv0m3TqA?autoplay=1&mute=1&controls=0&loop=1&playlist=1Hojv0m3TqA&start=8"
+    "trailer_url": "https://www.youtube.com/embed/1Hojv0m3TqA?autoplay=1&mute=1&controls=0&loop=1&playlist=1Hojv0m3TqA&start=8",
+    "requisitos": {
+      "ram": "128 MB",
+      "processador": "2 GHz+",
+      "placa_video": "128 MB",
+      "espaco_disco": "200 MB"
+    }
   }
 ]

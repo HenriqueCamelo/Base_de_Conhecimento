@@ -1,108 +1,126 @@
-let cardContainer = document.querySelector(".card-container");
-let campoBusca = document.querySelector("header input");
-let dados = [];
-let backgroundVideoContainer = document.getElementById("background-video-container");
-//  Seleciona o elemento body
-const body = document.querySelector('body'); 
+document.addEventListener('DOMContentLoaded', () => {
+    const cardContainer = document.querySelector('.card-container');
+    const inputBusca = document.querySelector('header input[type="text"]');
+    const botaoBusca = document.getElementById('botao-busca');
+    const avisoInteracao = document.getElementById('aviso-interacao');
+    const videoBackgroundContainer = document.getElementById('background-video-container');
+    
+    let todosOsJogos = []; // Armazena todos os dados do JSON
+    let cardComHover = null; // Para rastrear qual card está com o mouse
 
-// Função para exibir o trailer no background
-function clearTrailerBackground() {
-    backgroundVideoContainer.style.opacity = 0; // Torna invisível
-    
-    //  Remove a classe de imersão do body
-    body.classList.remove('immersive-mode'); 
-    
-    // Mantenha o iframe no DOM para carregamento rápido
-    // Apenas pause o vídeo, se o elemento iframe existir e tiver um método pause()
-    const iframe = backgroundVideoContainer.querySelector('iframe');
-    if (iframe) {
-        // Envia uma mensagem para o player do YouTube para pausar
-        // (Isso é mais confiável do que apenas remover o iframe)
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo"}', '*');
-    }
-
-}
-
-// A função showTrailerAsBackground continua como estava:
-function showTrailerAsBackground(trailerUrl) {
-    if (!trailerUrl) {
-        backgroundVideoContainer.style.opacity = 0;
-        return;
-    }
-
-    //  Adiciona a classe de imersão ao body
-    body.classList.add('immersive-mode');
-
-    // Verifica se a URL já está no iframe existente
-    const iframe = backgroundVideoContainer.querySelector('iframe');
-    if (iframe && iframe.src === trailerUrl) {
-        // Se a URL for a mesma, apenas torna visível e tenta dar play (se o pause funcionou)
-        backgroundVideoContainer.style.opacity = 1;
-        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo"}', '*');
-        return;
-    }
-
-    // Se for uma nova URL, cria o iframe
-    backgroundVideoContainer.innerHTML = `
-        <iframe 
-            src="${trailerUrl}" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    `;
-    backgroundVideoContainer.style.opacity = 1; // Torna visível
-}
-
-
-async function iniciarBusca() {
-    if (dados.length === 0) {
+    // 1. Carregamento dos dados JSON
+    async function carregarDados() {
         try {
-            let resposta = await fetch("data.json");
-            dados = await resposta.json();
+            const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error('Erro ao carregar data.json');
+            }
+            todosOsJogos = await response.json();
+            renderizarCards(todosOsJogos);
         } catch (error) {
-            console.error("Falha ao buscar dados:", error);
-            return;
+            console.error("Não foi possível carregar os dados:", error);
+            cardContainer.innerHTML = '<p style="color: red; font-size: 1.2rem;">Erro ao carregar a base de conhecimento.</p>';
         }
     }
 
-    const termoBusca = campoBusca.value.toLowerCase();
-    const dadosFiltrados = dados.filter(dado =>
-        dado.nome.toLowerCase().includes(termoBusca) ||
-        dado.descricao.toLowerCase().includes(termoBusca)
-    );
+    // 2. Função para renderizar os cards
+    const renderizarCards = (dados) => {
+        cardContainer.innerHTML = ''; // Limpa o container
+        
+        if (dados.length === 0) {
+            cardContainer.innerHTML = '<p>Nenhum jogo encontrado para esta busca.</p>';
+            return;
+        }
 
-    renderizarCards(dadosFiltrados);
-}
+        dados.forEach((jogo, index) => {
+            const card = document.createElement('article'); 
+            card.classList.add('card');
+            
+            // 🏆 MUDANÇA PRINCIPAL: Usamos o ID explícito do JSON
+            const idDoJogo = jogo.id; 
+            const detalhesUrl = `detalhes.html?id=${idDoJogo}`;
 
-function renderizarCards(dados) {
-    cardContainer.innerHTML = "";
-    for (let dado of dados) {
-        let article = document.createElement("article");
-        article.classList.add("card");
+            // Adiciona o conteúdo do card
+            card.innerHTML = `
+                <div class="card-conteudo">
+                    <img src="${jogo.imagem_url}" alt="Capa do Jogo ${jogo.nome}" class="card-imagem">
+                    <div class="card-info">
+                        <h2>${jogo.nome}</h2>
+                        <p class="card-data">Lançamento: ${jogo.data_criacao}</p>
+                        <p class="card-descricao">${jogo.descricao}</p>
+                        
+                        <div class="card-botoes">
+                            <a href="${detalhesUrl}" class="btn-requisitos">Req. Mínimos</a> 
+                            
+                            <a href="${jogo.link_oficial}" target="_blank">Site Oficial</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 3. Adiciona Manipuladores de Eventos (Hover e Clique)
+            
+            // Evento de HOVER (Mouse Enter) para o background imersivo
+            card.addEventListener('mouseenter', () => {
+                ativarModoImersivo(jogo.trailer_url);
+                cardComHover = card;
+                if (avisoInteracao) {
+                    avisoInteracao.style.opacity = '0'; // Esconde a dica
+                }
+            });
 
-        // Adiciona os event listeners para mouseover e mouseout
-        article.addEventListener('mouseover', () => {
-            showTrailerAsBackground(dado.trailer_url);
+            // Evento de HOVER (Mouse Leave) para sair do modo imersivo
+            card.addEventListener('mouseleave', () => {
+                if (cardComHover === card) {
+                    desativarModoImersivo();
+                    cardComHover = null;
+                }
+            });
+
+            cardContainer.appendChild(card);
         });
-        article.addEventListener('mouseout', () => {
-            clearTrailerBackground();
-        });
+    };
 
-        article.innerHTML = `
-        <div class="card-conteudo">
-            <img src="${dado.imagem_url}" alt="Capa do jogo ${dado.nome}" class="card-imagem">
-            <div class="card-info">
-                <h2>${dado.nome}</h2>
-                <p class="card-data">${dado.data_criacao}</p>
-                <p class="card-descricao">${dado.descricao}</p>
-                <a href="${dado.link_oficial}" target="_blank">Saiba mais</a>
-            </div>
-        </div>
+    // 4. Função de Busca (acionada pelo botão ou tecla Enter)
+    const iniciarBusca = () => {
+        const termo = inputBusca.value.toLowerCase();
+        
+        // Filtra os jogos com base no nome ou tags
+        const resultados = todosOsJogos.filter(jogo => 
+            jogo.nome.toLowerCase().includes(termo) || 
+            jogo.tags.some(tag => tag.toLowerCase().includes(termo))
+        );
+        
+        renderizarCards(resultados);
+    };
+
+    botaoBusca.addEventListener('click', iniciarBusca);
+    inputBusca.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            iniciarBusca();
+        }
+    });
+
+    // 5. Funções do Modo Imersivo (Background de Vídeo)
+    function ativarModoImersivo(trailerUrl) {
+        document.body.classList.add('immersive-mode');
+        videoBackgroundContainer.style.opacity = '1';
+        videoBackgroundContainer.innerHTML = `
+            <iframe src="${trailerUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         `;
-        cardContainer.appendChild(article);
     }
-}
 
-// Opcional: Chama iniciarBusca() ao carregar a página para exibir os cards
-document.addEventListener('DOMContentLoaded', iniciarBusca);
+    function desativarModoImersivo() {
+        document.body.classList.remove('immersive-mode');
+        videoBackgroundContainer.style.opacity = '0';
+        // Atrasamos a remoção do iframe para que o efeito de transição de opacidade funcione
+        setTimeout(() => {
+            if (!cardComHover) {
+                 videoBackgroundContainer.innerHTML = '';
+            }
+        }, 500); 
+    }
+
+    // Inicia o carregamento dos dados quando a página carrega
+    carregarDados();
+});
